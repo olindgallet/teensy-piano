@@ -40,6 +40,7 @@ void setup() {
   Keyboard.begin();
   Mouse.begin();
 }
+
 void setOutputPins(int pin12, int pin13, int pin14, int pin15){
   digitalWrite(15, pin15);
   digitalWrite(14, pin14);
@@ -59,6 +60,7 @@ void readInputPins(){
 }
 
 void loop() {
+  //following code is to read input from the piano.  It may change based upon your experimentation.
   setOutputPins(HIGH, HIGH, HIGH, LOW);
   readInputPins();
   if (button11 == LOW){
@@ -171,6 +173,7 @@ void loop() {
     Keyboard.releaseAll();
   }
 
+  //mouse handling code.  18 is connected to the left button, 19 to the right button
   lButton = digitalRead(18);
   rButton = digitalRead(19);
   if (lButton == LOW){
@@ -179,6 +182,7 @@ void loop() {
     Mouse.click(MOUSE_RIGHT);
   }
 
+  //joystick handling code.  16 is the horizontal axis, 17 is the vertical axis.
   hAxis = analogRead(16);
   vAxis = analogRead(17);
   if (hAxis < 350){
@@ -201,5 +205,6 @@ void loop() {
     Mouse.move(0, 5, 0);
   }
   
+  //delay between reading inputs.
   delay(100);
 }
